@@ -37,12 +37,12 @@ class XsltWsdlGenerator  {
     }
     private function generateStructure() {
         $filePath = realpath(__DIR__."/../xslt/structure.xsl");
-        $xml = new  DOMDocument("1.0","UTF-8");
+        $xml = new  \DOMDocument("1.0","UTF-8");
         $xml->load($this->wsdl);
         
-        $xsl = new DOMDocument("1.0","UTF-8");
+        $xsl = new \DOMDocument("1.0","UTF-8");
         $xsl->load($filePath);
-        $proc = new XSLTProcessor;
+        $proc = new \XSLTProcessor;
         $proc->importStyleSheet($xsl);
         $this->setXsltParams($proc);
 
@@ -59,24 +59,24 @@ class XsltWsdlGenerator  {
         }
         $filePath = realpath(__DIR__."/../xslt/".$this->lang."-".$dir.".xsl");
         if(!file_exists($filePath)) {
-            throw new Exception("Could not load XSLT: ". $filePath."\n");
+            throw new \Exception("Could not load XSLT: ". $filePath."\n");
         }
-        $xsl = new DOMDocument("1.0","UTF-8");
+        $xsl = new \DOMDocument("1.0","UTF-8");
         $xsl->load($filePath);
-        $proc = new XSLTProcessor;
+        $proc = new \XSLTProcessor;
         $proc->importStyleSheet($xsl);
         $this->setXsltParams($proc);
 
-        $xml = new  DOMDocument("1.0","UTF-8");
+        $xml = new  \DOMDocument("1.0","UTF-8");
         $xml->loadXML($xmlString);   
         foreach($xml->firstChild->childNodes as $key => $child) {
             /**
-             * @var DOMElement $child
+             * @var \DOMElement $child
              */
             if(get_class($child)=="DOMElement") {
-                $childDoc  = new  DOMDocument("1.0","UTF-8");
+                $childDoc  = new  \DOMDocument("1.0","UTF-8");
                 $childDoc->appendChild($childDoc->importNode($child,true));  
-                $proc = new XSLTProcessor;
+                $proc = new \XSLTProcessor;
                 $proc->importStyleSheet($xsl);
                 $this->setXsltParams($proc);     
                 $fileName = $fullPath.$child->getAttribute("name").".php";
@@ -90,7 +90,7 @@ class XsltWsdlGenerator  {
         }
         return;       
     }
-    private function setXsltParams(XSLTProcessor $proc) {
+    private function setXsltParams(\XSLTProcessor $proc) {
         $proc->setParameter('','config-file',$this->configFile);
         $proc->setParameter('','api-name',$this->apiName);
         
