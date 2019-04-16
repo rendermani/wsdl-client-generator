@@ -1,4 +1,5 @@
 <?php
+namespace rendermani\wsdlClientGenerator;
 
 class XsltWsdlGenerator  {
     private $classMap = [];
