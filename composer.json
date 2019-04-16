@@ -19,5 +19,15 @@
         "phpunit/phpunit": "^8",
         "ext-xsl": "*",                
         "ext-dom": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "rendermani\\wsdlClientGenerator\\;"  : "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "rendermani\\wsdlClientGenerator\\;"  : "src"          
+        }
     }
 }
