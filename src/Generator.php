@@ -50,7 +50,6 @@ class Generator  {
     }
     private function generateCode($xmlString,$dir,$replace) {
         echo "\ngenerate $dir\n";
-        var_dump($this->outputPath);
         if(!file_exists($this->outputPath)) {
             mkdir($this->outputPath,077,true);   
         }
