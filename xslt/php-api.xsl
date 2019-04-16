@@ -47,7 +47,8 @@
         <xsl:text>}</xsl:text>
     </xsl:template>
     <xsl:template match="@extends">
-        <xsl:value-of select="concat(' extends ', ., ' ')"/>
+        <xsl:variable name="namespace" select="$config//lib/namespace"/>
+        <xsl:value-of select="concat(' extends ', $namespace,'\',., ' ')"/>
     </xsl:template>
     <xsl:template name="id">
         <xsl:variable name="class" select="."/>
