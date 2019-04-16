@@ -53,7 +53,7 @@ class XsltWsdlGenerator  {
         if(!file_exists($this->outputPath)) {
             mkdir($this->outputPath,077,true);   
         }
-        $fullPath = $this->outputPath."/".$dir."/";
+        $fullPath = $this->outputPath."/".$dir."/".$this->apiName."/";
         if(!file_exists($fullPath)) {
             mkdir($fullPath,077,true);   
         }
