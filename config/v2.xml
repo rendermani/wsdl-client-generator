@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <ids>
+        <id>Handle</id>
+        <id>OrderId</id>
+        <id>DomainHandle</id>
+        <id>MsgId</id>
+    </ids>
+    <api-name>v2</api-name>
+    <namespace>ascio\v2\service</namespace>
+    <db>
+        <class>DbModel</class>
+        <method>db</method>
+        <namespace>ascio\v2\model</namespace>   
+        <used-classes>
+            <class>Attachment</class>
+            <class>Contact</class>
+            <class>DnsSecKey</class>
+            <class>DnsSecKeys</class>
+            <class>Domain</class>
+            <class>Extension</class>
+            <class>Extensions</class>
+            <class>Message</class>
+            <class>NameServer</class>
+            <class>NameServers</class>
+            <class>Order</class>
+            <class>PrivacyProxy</class>
+            <class>QueueItem</class>
+            <class>Registrant</class>
+            <class>TradeMark</class>
+        </used-classes>
+    </db>
+    <api>
+        <class>ApiModel</class>
+        <namespace>ascio\v2\model</namespace>   
+        <used-classes>            
+            <class>Contact</class>
+            <class>DnsSecKey</class>
+            <class>DnsSecKeys</class>
+            <class>Domain</class>
+            <class>Message</class>
+            <class>NameServer</class>
+            <class>NameServers</class>
+            <class>Order</class>
+            <class>PrivacyProxy</class>
+            <class>QueueItem</class>
+            <class>Registrant</class>
+            <class>TradeMark</class>
+        </used-classes>   
+    </api>
+    <lib>
+        <namespace>ascio\v2</namespace>    
+    </lib>    
+    <output-dir>../v2/service</output-dir>
+    <classmap>
+        <class name="Registrant" map-to-class="ascio\v2\Registrant"></class>
+        <class name="Domain"  map-to-class="ascio\v2\Domain"></class>
+    </classmap>    
+</config>

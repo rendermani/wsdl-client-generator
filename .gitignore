@@ -1,0 +1,7 @@
+dns/*
+v2/*
+v3/*
+output/*
+.env
+xslt/oxygen-transform.scenarios
+wsdlgenerator.xpr

@@ -1,0 +1,1370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classes xmlns:lib="http://ascio.com/lib">
+   <class name="Service" extends="ServiceBase">
+      <method name="CreateOrder">
+         <return>CreateOrderResponse</return>
+         <argument name="request" type="AbstractOrderRequest"/>
+      </method>
+      <method name="ValidateOrder">
+         <return>ValidateOrderResponse</return>
+         <argument name="request" type="AbstractOrderRequest"/>
+      </method>
+      <method name="GetOrder">
+         <return>GetOrderResponse</return>
+         <argument name="request" type="GetOrderRequest"/>
+      </method>
+      <method name="GetOrders">
+         <return>GetOrdersResponse</return>
+         <argument name="request" type="GetOrdersRequest"/>
+      </method>
+      <method name="GetMark">
+         <return>GetMarkResponse</return>
+         <argument name="request" type="GetMarkRequest"/>
+      </method>
+      <method name="GetDefensive">
+         <return>GetDefensiveResponse</return>
+         <argument name="request" type="GetDefensiveRequest"/>
+      </method>
+      <method name="GetNameWatch">
+         <return>GetNameWatchResponse</return>
+         <argument name="request" type="GetNameWatchRequest"/>
+      </method>
+      <method name="GetSslCertificate">
+         <return>GetSslCertificateResponse</return>
+         <argument name="request" type="GetSslCertificateRequest"/>
+      </method>
+      <method name="GetAutoInstallSsl">
+         <return>GetAutoInstallSslResponse</return>
+         <argument name="request" type="GetAutoInstallSslRequest"/>
+      </method>
+      <method name="GetMessages">
+         <return>GetMessagesResponse</return>
+         <argument name="request" type="GetMessagesRequest"/>
+      </method>
+      <method name="PollQueue">
+         <return>PollQueueResponse</return>
+         <argument name="request" type="PollQueueRequest"/>
+      </method>
+      <method name="AckQueueMessage">
+         <return>AckQueueMessageResponse</return>
+         <argument name="request" type="AckQueueMessageRequest"/>
+      </method>
+      <method name="GetQueueMessage">
+         <return>GetQueueMessageResponse</return>
+         <argument name="request" type="GetQueueMessageRequest"/>
+      </method>
+      <method name="UploadDocumentation">
+         <return>UploadDocumentationResponse</return>
+         <argument name="request" type="UploadDocumentationRequest"/>
+      </method>
+      <method name="UploadMessage">
+         <return>UploadMessageResponse</return>
+         <argument name="request" type="UploadMessageRequest"/>
+      </method>
+      <method name="CreateOrder">
+         <return>CreateOrderResponse</return>
+         <argument name="request" type="AbstractOrderRequest"/>
+      </method>
+      <method name="ValidateOrder">
+         <return>ValidateOrderResponse</return>
+         <argument name="request" type="AbstractOrderRequest"/>
+      </method>
+      <method name="GetOrder">
+         <return>GetOrderResponse</return>
+         <argument name="request" type="GetOrderRequest"/>
+      </method>
+      <method name="GetOrders">
+         <return>GetOrdersResponse</return>
+         <argument name="request" type="GetOrdersRequest"/>
+      </method>
+      <method name="GetMark">
+         <return>GetMarkResponse</return>
+         <argument name="request" type="GetMarkRequest"/>
+      </method>
+      <method name="GetDefensive">
+         <return>GetDefensiveResponse</return>
+         <argument name="request" type="GetDefensiveRequest"/>
+      </method>
+      <method name="GetNameWatch">
+         <return>GetNameWatchResponse</return>
+         <argument name="request" type="GetNameWatchRequest"/>
+      </method>
+      <method name="GetSslCertificate">
+         <return>GetSslCertificateResponse</return>
+         <argument name="request" type="GetSslCertificateRequest"/>
+      </method>
+      <method name="GetAutoInstallSsl">
+         <return>GetAutoInstallSslResponse</return>
+         <argument name="request" type="GetAutoInstallSslRequest"/>
+      </method>
+      <method name="GetMessages">
+         <return>GetMessagesResponse</return>
+         <argument name="request" type="GetMessagesRequest"/>
+      </method>
+      <method name="PollQueue">
+         <return>PollQueueResponse</return>
+         <argument name="request" type="PollQueueRequest"/>
+      </method>
+      <method name="AckQueueMessage">
+         <return>AckQueueMessageResponse</return>
+         <argument name="request" type="AckQueueMessageRequest"/>
+      </method>
+      <method name="GetQueueMessage">
+         <return>GetQueueMessageResponse</return>
+         <argument name="request" type="GetQueueMessageRequest"/>
+      </method>
+      <method name="UploadDocumentation">
+         <return>UploadDocumentationResponse</return>
+         <argument name="request" type="UploadDocumentationRequest"/>
+      </method>
+      <method name="UploadMessage">
+         <return>UploadMessageResponse</return>
+         <argument name="request" type="UploadMessageRequest"/>
+      </method>
+   </class>
+   <class name="AbstractOrderRequest" extends="Base">
+      <property name="Type" type="OrderType" get-set-name="Type" var="type"/>
+      <property name="Period" type="int" get-set-name="Period" var="period"/>
+      <property name="TransactionComment"
+                type="string"
+                get-set-name="TransactionComment"
+                var="transactionComment"/>
+      <property name="Comments"
+                type="string"
+                get-set-name="Comments"
+                var="comments"/>
+      <property name="Documentation"
+                type="string"
+                get-set-name="Documentation"
+                var="documentation"/>
+      <property name="Options"
+                type="string"
+                get-set-name="Options"
+                var="options"/>
+   </class>
+   <class name="MarkOrderRequest" extends="AbstractOrderRequest">
+      <property name="Mark" type="AbstractMark" get-set-name="Mark" var="mark"/>
+      <property name="Documents"
+                type="ArrayOfMarkOrderDocument"
+                get-set-name="Documents"
+                var="documents"/>
+   </class>
+   <class name="AbstractMark" extends="Base">
+      <property name="Handle" type="string" get-set-name="Handle" var="handle"/>
+      <property name="MarkName"
+                type="string"
+                get-set-name="MarkName"
+                var="markName"/>
+      <property name="MarkId" type="string" get-set-name="MarkId" var="markId"/>
+      <property name="AuthInfo"
+                type="string"
+                get-set-name="AuthInfo"
+                var="authInfo"/>
+      <property name="ServiceType"
+                type="MarkServiceType"
+                get-set-name="ServiceType"
+                var="serviceType"/>
+      <property name="GoodsAndServicesDescription"
+                type="string"
+                get-set-name="GoodsAndServicesDescription"
+                var="goodsAndServicesDescription"/>
+      <property name="Labels"
+                type="ArrayOfstring"
+                get-set-name="Labels"
+                var="labels"/>
+      <property name="ClaimEmailNotification1"
+                type="string"
+                get-set-name="ClaimEmailNotification1"
+                var="claimEmailNotification1"/>
+      <property name="ClaimEmailNotification2"
+                type="string"
+                get-set-name="ClaimEmailNotification2"
+                var="claimEmailNotification2"/>
+      <property name="ClaimEmailNotification3"
+                type="string"
+                get-set-name="ClaimEmailNotification3"
+                var="claimEmailNotification3"/>
+      <property name="ClaimEmailNotification4"
+                type="string"
+                get-set-name="ClaimEmailNotification4"
+                var="claimEmailNotification4"/>
+      <property name="ClaimEmailNotification5"
+                type="string"
+                get-set-name="ClaimEmailNotification5"
+                var="claimEmailNotification5"/>
+      <property name="NotificationFrequency"
+                type="NotificationFrequencyType"
+                get-set-name="NotificationFrequency"
+                var="notificationFrequency"/>
+      <property name="Owner" type="Registrant" get-set-name="Owner" var="owner"/>
+      <property name="Reseller"
+                type="Contact"
+                get-set-name="Reseller"
+                var="reseller"/>
+      <property name="Extensions"
+                type="Extensions"
+                get-set-name="Extensions"
+                var="extensions"/>
+      <property name="ObjectComment"
+                type="string"
+                get-set-name="ObjectComment"
+                var="objectComment"/>
+   </class>
+   <class name="Registrant" extends="Contact">
+      <property name="VatNumber"
+                type="string"
+                get-set-name="VatNumber"
+                var="vatNumber"/>
+      <property name="NexusCategory"
+                type="string"
+                get-set-name="NexusCategory"
+                var="nexusCategory"/>
+   </class>
+   <class name="Contact" extends="Base">
+      <property name="Handle" type="string" get-set-name="Handle" var="handle"/>
+      <property name="FirstName"
+                type="string"
+                get-set-name="FirstName"
+                var="firstName"/>
+      <property name="LastName"
+                type="string"
+                get-set-name="LastName"
+                var="lastName"/>
+      <property name="OrgName"
+                type="string"
+                get-set-name="OrgName"
+                var="orgName"/>
+      <property name="Address1"
+                type="string"
+                get-set-name="Address1"
+                var="address1"/>
+      <property name="Address2"
+                type="string"
+                get-set-name="Address2"
+                var="address2"/>
+      <property name="City" type="string" get-set-name="City" var="city"/>
+      <property name="State" type="string" get-set-name="State" var="state"/>
+      <property name="PostalCode"
+                type="string"
+                get-set-name="PostalCode"
+                var="postalCode"/>
+      <property name="CountryCode"
+                type="string"
+                get-set-name="CountryCode"
+                var="countryCode"/>
+      <property name="Phone" type="string" get-set-name="Phone" var="phone"/>
+      <property name="Fax" type="string" get-set-name="Fax" var="fax"/>
+      <property name="Email" type="string" get-set-name="Email" var="email"/>
+      <property name="Type" type="string" get-set-name="Type" var="type"/>
+      <property name="Details"
+                type="string"
+                get-set-name="Details"
+                var="details"/>
+      <property name="OrganisationNumber"
+                type="string"
+                get-set-name="OrganisationNumber"
+                var="organisationNumber"/>
+      <property name="Extensions"
+                type="Extensions"
+                get-set-name="Extensions"
+                var="extensions"/>
+   </class>
+   <class name="Extensions" extends="ArrayBase">
+      <property name="KeyValue"
+                type="KeyValue"
+                get-set-name="KeyValue"
+                var="keyValue"/>
+      <property name="Key" type="string" get-set-name="Key" var="key"/>
+      <property name="Value" type="string" get-set-name="Value" var="value"/>
+   </class>
+   <class name="AutoInstallSslOrderRequest" extends="AbstractOrderRequest">
+      <property name="AutoInstallSsl"
+                type="AutoInstallSsl"
+                get-set-name="AutoInstallSsl"
+                var="autoInstallSsl"/>
+   </class>
+   <class name="AutoInstallSsl" extends="Base">
+      <property name="Handle" type="string" get-set-name="Handle" var="handle"/>
+      <property name="CommonName"
+                type="string"
+                get-set-name="CommonName"
+                var="commonName"/>
+      <property name="ProductCode"
+                type="string"
+                get-set-name="ProductCode"
+                var="productCode"/>
+      <property name="Email" type="string" get-set-name="Email" var="email"/>
+      <property name="SanCount"
+                type="int"
+                get-set-name="SanCount"
+                var="sanCount"/>
+      <property name="ObjectComment"
+                type="string"
+                get-set-name="ObjectComment"
+                var="objectComment"/>
+   </class>
+   <class name="SslCertificateOrderRequest" extends="AbstractOrderRequest">
+      <property name="SslCertificate"
+                type="SslCertificate"
+                get-set-name="SslCertificate"
+                var="sslCertificate"/>
+   </class>
+   <class name="SslCertificate" extends="Base">
+      <property name="Handle" type="string" get-set-name="Handle" var="handle"/>
+      <property name="CommonName"
+                type="string"
+                get-set-name="CommonName"
+                var="commonName"/>
+      <property name="ProductCode"
+                type="string"
+                get-set-name="ProductCode"
+                var="productCode"/>
+      <property name="WebServerType"
+                type="WebServerType"
+                get-set-name="WebServerType"
+                var="webServerType"/>
+      <property name="ApproverEmail"
+                type="string"
+                get-set-name="ApproverEmail"
+                var="approverEmail"/>
+      <property name="CSR" type="string" get-set-name="CSR" var="cSR"/>
+      <property name="Owner" type="Registrant" get-set-name="Owner" var="owner"/>
+      <property name="Admin" type="Contact" get-set-name="Admin" var="admin"/>
+      <property name="Tech" type="Contact" get-set-name="Tech" var="tech"/>
+      <property name="SanNames"
+                type="ArrayOfstring"
+                get-set-name="SanNames"
+                var="sanNames"/>
+      <property name="ObjectComment"
+                type="string"
+                get-set-name="ObjectComment"
+                var="objectComment"/>
+      <property name="ValidationType"
+                type="SslDomainValidationType"
+                get-set-name="ValidationType"
+                var="validationType"/>
+   </class>
+   <class name="TreatyOrStatuteMark" extends="AbstractMark">
+      <property name="Title" type="string" get-set-name="Title" var="title"/>
+      <property name="ReferenceNumber"
+                type="string"
+                get-set-name="ReferenceNumber"
+                var="referenceNumber"/>
+      <property name="Country"
+                type="string"
+                get-set-name="Country"
+                var="country"/>
+      <property name="Region" type="string" get-set-name="Region" var="region"/>
+      <property name="ProtectionDate"
+                type="dateTime"
+                get-set-name="ProtectionDate"
+                var="protectionDate"/>
+      <property name="ExecutionDate"
+                type="dateTime"
+                get-set-name="ExecutionDate"
+                var="executionDate"/>
+   </class>
+   <class name="Trademark" extends="AbstractMark">
+      <property name="ApplicationId"
+                type="string"
+                get-set-name="ApplicationId"
+                var="applicationId"/>
+      <property name="RegistrationNumber"
+                type="string"
+                get-set-name="RegistrationNumber"
+                var="registrationNumber"/>
+      <property name="ApplicationDate"
+                type="dateTime"
+                get-set-name="ApplicationDate"
+                var="applicationDate"/>
+      <property name="RegistrationDate"
+                type="dateTime"
+                get-set-name="RegistrationDate"
+                var="registrationDate"/>
+      <property name="ExpirationDate"
+                type="dateTime"
+                get-set-name="ExpirationDate"
+                var="expirationDate"/>
+      <property name="GoodsAndServicesClasses"
+                type="ArrayOfint"
+                get-set-name="GoodsAndServicesClasses"
+                var="goodsAndServicesClasses"/>
+      <property name="Jurisdiction"
+                type="string"
+                get-set-name="Jurisdiction"
+                var="jurisdiction"/>
+   </class>
+   <class name="CourtValidatedMark" extends="AbstractMark">
+      <property name="CourtName"
+                type="string"
+                get-set-name="CourtName"
+                var="courtName"/>
+      <property name="ReferenceNumber"
+                type="string"
+                get-set-name="ReferenceNumber"
+                var="referenceNumber"/>
+      <property name="Country"
+                type="string"
+                get-set-name="Country"
+                var="country"/>
+      <property name="Region" type="string" get-set-name="Region" var="region"/>
+      <property name="ProtectionDate"
+                type="dateTime"
+                get-set-name="ProtectionDate"
+                var="protectionDate"/>
+   </class>
+   <class name="SecurityHeaderDetails" extends="Base">
+      <property name="Account"
+                type="string"
+                get-set-name="Account"
+                var="account"/>
+      <property name="Password"
+                type="string"
+                get-set-name="Password"
+                var="password"/>
+   </class>
+   <class name="ArrayOfMarkOrderDocument" extends="ArrayBase">
+      <property name="MarkOrderDocument"
+                type="MarkOrderDocument"
+                get-set-name="MarkOrderDocument"
+                var="markOrderDocument"/>
+   </class>
+   <class name="MarkOrderDocument" extends="Attachment">
+      <property name="DocType"
+                type="MarkOrderDocType"
+                get-set-name="DocType"
+                var="docType"/>
+   </class>
+   <class name="Attachment" extends="Base">
+      <property name="FileName"
+                type="string"
+                get-set-name="FileName"
+                var="fileName"/>
+      <property name="Content"
+                type="base64Binary"
+                get-set-name="Content"
+                var="content"/>
+   </class>
+   <class name="NameWatchOrderRequest" extends="AbstractOrderRequest">
+      <property name="NameWatch"
+                type="NameWatch"
+                get-set-name="NameWatch"
+                var="nameWatch"/>
+   </class>
+   <class name="NameWatch" extends="Base">
+      <property name="Handle" type="string" get-set-name="Handle" var="handle"/>
+      <property name="Name" type="string" get-set-name="Name" var="name"/>
+      <property name="NotificationFrequency"
+                type="NotificationFrequencyType"
+                get-set-name="NotificationFrequency"
+                var="notificationFrequency"/>
+      <property name="Tier" type="int" get-set-name="Tier" var="tier"/>
+      <property name="EmailNotification1"
+                type="string"
+                get-set-name="EmailNotification1"
+                var="emailNotification1"/>
+      <property name="EmailNotification2"
+                type="string"
+                get-set-name="EmailNotification2"
+                var="emailNotification2"/>
+      <property name="EmailNotification3"
+                type="string"
+                get-set-name="EmailNotification3"
+                var="emailNotification3"/>
+      <property name="EmailNotification4"
+                type="string"
+                get-set-name="EmailNotification4"
+                var="emailNotification4"/>
+      <property name="EmailNotification5"
+                type="string"
+                get-set-name="EmailNotification5"
+                var="emailNotification5"/>
+      <property name="Owner" type="Registrant" get-set-name="Owner" var="owner"/>
+      <property name="Reseller"
+                type="Contact"
+                get-set-name="Reseller"
+                var="reseller"/>
+      <property name="ObjectComment"
+                type="string"
+                get-set-name="ObjectComment"
+                var="objectComment"/>
+   </class>
+   <class name="DefensiveOrderRequest" extends="AbstractOrderRequest">
+      <property name="Defensive"
+                type="Defensive"
+                get-set-name="Defensive"
+                var="defensive"/>
+   </class>
+   <class name="Defensive" extends="Base">
+      <property name="Handle" type="string" get-set-name="Handle" var="handle"/>
+      <property name="Name" type="string" get-set-name="Name" var="name"/>
+      <property name="MarkHandle"
+                type="string"
+                get-set-name="MarkHandle"
+                var="markHandle"/>
+      <property name="AuthInfo"
+                type="string"
+                get-set-name="AuthInfo"
+                var="authInfo"/>
+      <property name="Encoding"
+                type="string"
+                get-set-name="Encoding"
+                var="encoding"/>
+      <property name="Owner" type="Registrant" get-set-name="Owner" var="owner"/>
+      <property name="Admin" type="Contact" get-set-name="Admin" var="admin"/>
+      <property name="Tech" type="Contact" get-set-name="Tech" var="tech"/>
+      <property name="Billing"
+                type="Contact"
+                get-set-name="Billing"
+                var="billing"/>
+      <property name="Reseller"
+                type="Contact"
+                get-set-name="Reseller"
+                var="reseller"/>
+      <property name="ObjectComment"
+                type="string"
+                get-set-name="ObjectComment"
+                var="objectComment"/>
+   </class>
+   <class name="CreateOrderResponse" extends="AbstractResponse">
+      <property name="OrderInfo"
+                type="OrderInfo"
+                get-set-name="OrderInfo"
+                var="orderInfo"/>
+   </class>
+   <class name="AbstractResponse" extends="Base">
+      <property name="ResultCode"
+                type="int"
+                get-set-name="ResultCode"
+                var="resultCode"/>
+      <property name="ResultMessage"
+                type="string"
+                get-set-name="ResultMessage"
+                var="resultMessage"/>
+      <property name="Errors"
+                type="ArrayOfstring"
+                get-set-name="Errors"
+                var="errors"/>
+   </class>
+   <class name="OrderInfo" extends="Base">
+      <property name="OrderId"
+                type="string"
+                get-set-name="OrderId"
+                var="orderId"/>
+      <property name="Status"
+                type="OrderStatusType"
+                get-set-name="Status"
+                var="status"/>
+      <property name="Created"
+                type="dateTime"
+                get-set-name="Created"
+                var="created"/>
+      <property name="OrderRequest"
+                type="AbstractOrderRequest"
+                get-set-name="OrderRequest"
+                var="orderRequest"/>
+   </class>
+   <class name="ValidateOrderResponse" extends="AbstractResponse"/>
+   <class name="GetOrderRequest" extends="Base">
+      <property name="OrderId"
+                type="string"
+                get-set-name="OrderId"
+                var="orderId"/>
+   </class>
+   <class name="GetOrderResponse" extends="AbstractResponse">
+      <property name="OrderInfo"
+                type="OrderInfo"
+                get-set-name="OrderInfo"
+                var="orderInfo"/>
+   </class>
+   <class name="GetOrdersRequest" extends="Base">
+      <property name="TransactionComment"
+                type="string"
+                get-set-name="TransactionComment"
+                var="transactionComment"/>
+      <property name="Comments"
+                type="string"
+                get-set-name="Comments"
+                var="comments"/>
+      <property name="ObjectName"
+                type="string"
+                get-set-name="ObjectName"
+                var="objectName"/>
+      <property name="FromDate"
+                type="dateTime"
+                get-set-name="FromDate"
+                var="fromDate"/>
+      <property name="ToDate"
+                type="dateTime"
+                get-set-name="ToDate"
+                var="toDate"/>
+      <property name="OrderStatusTypes"
+                type="ArrayOfOrderStatusType"
+                get-set-name="OrderStatusTypes"
+                var="orderStatusTypes"/>
+      <property name="OrderTypes"
+                type="ArrayOfOrderType"
+                get-set-name="OrderTypes"
+                var="orderTypes"/>
+      <property name="ObjectTypes"
+                type="ArrayOfObjectType"
+                get-set-name="ObjectTypes"
+                var="objectTypes"/>
+      <property name="OrderSort"
+                type="SearchOrderSortType"
+                get-set-name="OrderSort"
+                var="orderSort"/>
+      <property name="PageInfo"
+                type="PagingInfo"
+                get-set-name="PageInfo"
+                var="pageInfo"/>
+   </class>
+   <class name="ArrayOfOrderStatusType" extends="ArrayBase">
+      <property name="OrderStatusType"
+                type="OrderStatusType"
+                get-set-name="OrderStatusType"
+                var="orderStatusType"/>
+   </class>
+   <class name="ArrayOfOrderType" extends="ArrayBase">
+      <property name="OrderType"
+                type="OrderType"
+                get-set-name="OrderType"
+                var="orderType"/>
+   </class>
+   <class name="ArrayOfObjectType" extends="ArrayBase">
+      <property name="ObjectType"
+                type="ObjectType"
+                get-set-name="ObjectType"
+                var="objectType"/>
+   </class>
+   <class name="PagingInfo" extends="Base">
+      <property name="PageIndex"
+                type="int"
+                get-set-name="PageIndex"
+                var="pageIndex"/>
+      <property name="PageSize"
+                type="int"
+                get-set-name="PageSize"
+                var="pageSize"/>
+   </class>
+   <class name="GetOrdersResponse" extends="AbstractResponse">
+      <property name="TotalCount"
+                type="int"
+                get-set-name="TotalCount"
+                var="totalCount"/>
+      <property name="OrdersInfo"
+                type="ArrayOfOrderInfo"
+                get-set-name="OrdersInfo"
+                var="ordersInfo"/>
+   </class>
+   <class name="ArrayOfOrderInfo" extends="ArrayBase">
+      <property name="OrderInfo"
+                type="OrderInfo"
+                get-set-name="OrderInfo"
+                var="orderInfo"/>
+   </class>
+   <class name="GetMarkRequest" extends="Base">
+      <property name="Handle" type="string" get-set-name="Handle" var="handle"/>
+   </class>
+   <class name="GetMarkResponse" extends="AbstractResponse">
+      <property name="MarkInfo"
+                type="MarkInfo"
+                get-set-name="MarkInfo"
+                var="markInfo"/>
+   </class>
+   <class name="MarkInfo" extends="Base">
+      <property name="Status" type="string" get-set-name="Status" var="status"/>
+      <property name="Created"
+                type="dateTime"
+                get-set-name="Created"
+                var="created"/>
+      <property name="Expires"
+                type="dateTime"
+                get-set-name="Expires"
+                var="expires"/>
+      <property name="Mark" type="AbstractMark" get-set-name="Mark" var="mark"/>
+      <property name="Smd" type="string" get-set-name="Smd" var="smd"/>
+   </class>
+   <class name="GetDefensiveRequest" extends="Base">
+      <property name="Handle" type="string" get-set-name="Handle" var="handle"/>
+   </class>
+   <class name="GetDefensiveResponse" extends="AbstractResponse">
+      <property name="DefensiveInfo"
+                type="DefensiveInfo"
+                get-set-name="DefensiveInfo"
+                var="defensiveInfo"/>
+   </class>
+   <class name="DefensiveInfo" extends="Base">
+      <property name="Handle" type="string" get-set-name="Handle" var="handle"/>
+      <property name="Status" type="string" get-set-name="Status" var="status"/>
+      <property name="Created"
+                type="dateTime"
+                get-set-name="Created"
+                var="created"/>
+      <property name="Expires"
+                type="dateTime"
+                get-set-name="Expires"
+                var="expires"/>
+      <property name="Name" type="string" get-set-name="Name" var="name"/>
+      <property name="AuthInfo"
+                type="string"
+                get-set-name="AuthInfo"
+                var="authInfo"/>
+      <property name="Encoding"
+                type="string"
+                get-set-name="Encoding"
+                var="encoding"/>
+      <property name="Owner" type="Registrant" get-set-name="Owner" var="owner"/>
+      <property name="Admin" type="Contact" get-set-name="Admin" var="admin"/>
+      <property name="Tech" type="Contact" get-set-name="Tech" var="tech"/>
+      <property name="Billing"
+                type="Contact"
+                get-set-name="Billing"
+                var="billing"/>
+      <property name="Reseller"
+                type="Contact"
+                get-set-name="Reseller"
+                var="reseller"/>
+      <property name="ObjectComment"
+                type="string"
+                get-set-name="ObjectComment"
+                var="objectComment"/>
+   </class>
+   <class name="GetNameWatchRequest" extends="Base">
+      <property name="Handle" type="string" get-set-name="Handle" var="handle"/>
+   </class>
+   <class name="GetNameWatchResponse" extends="AbstractResponse">
+      <property name="NameWatchInfo"
+                type="NameWatchInfo"
+                get-set-name="NameWatchInfo"
+                var="nameWatchInfo"/>
+   </class>
+   <class name="NameWatchInfo" extends="Base">
+      <property name="Handle" type="string" get-set-name="Handle" var="handle"/>
+      <property name="Status" type="string" get-set-name="Status" var="status"/>
+      <property name="Created"
+                type="dateTime"
+                get-set-name="Created"
+                var="created"/>
+      <property name="Expires"
+                type="dateTime"
+                get-set-name="Expires"
+                var="expires"/>
+      <property name="Name" type="string" get-set-name="Name" var="name"/>
+      <property name="NotificationFrequency"
+                type="NotificationFrequencyType"
+                get-set-name="NotificationFrequency"
+                var="notificationFrequency"/>
+      <property name="Tier" type="int" get-set-name="Tier" var="tier"/>
+      <property name="EmailNotification1"
+                type="string"
+                get-set-name="EmailNotification1"
+                var="emailNotification1"/>
+      <property name="EmailNotification2"
+                type="string"
+                get-set-name="EmailNotification2"
+                var="emailNotification2"/>
+      <property name="EmailNotification3"
+                type="string"
+                get-set-name="EmailNotification3"
+                var="emailNotification3"/>
+      <property name="EmailNotification4"
+                type="string"
+                get-set-name="EmailNotification4"
+                var="emailNotification4"/>
+      <property name="EmailNotification5"
+                type="string"
+                get-set-name="EmailNotification5"
+                var="emailNotification5"/>
+      <property name="Owner" type="Registrant" get-set-name="Owner" var="owner"/>
+      <property name="Reseller"
+                type="Contact"
+                get-set-name="Reseller"
+                var="reseller"/>
+      <property name="Labels"
+                type="ArrayOfstring"
+                get-set-name="Labels"
+                var="labels"/>
+      <property name="ObjectComment"
+                type="string"
+                get-set-name="ObjectComment"
+                var="objectComment"/>
+   </class>
+   <class name="GetSslCertificateRequest" extends="Base">
+      <property name="Handle" type="string" get-set-name="Handle" var="handle"/>
+   </class>
+   <class name="GetSslCertificateResponse" extends="AbstractResponse">
+      <property name="SslCertificateInfo"
+                type="SslCertificateInfo"
+                get-set-name="SslCertificateInfo"
+                var="sslCertificateInfo"/>
+   </class>
+   <class name="SslCertificateInfo" extends="Base">
+      <property name="Handle" type="string" get-set-name="Handle" var="handle"/>
+      <property name="Status" type="string" get-set-name="Status" var="status"/>
+      <property name="Created"
+                type="dateTime"
+                get-set-name="Created"
+                var="created"/>
+      <property name="Expires"
+                type="dateTime"
+                get-set-name="Expires"
+                var="expires"/>
+      <property name="CommonName"
+                type="string"
+                get-set-name="CommonName"
+                var="commonName"/>
+      <property name="ProductCode"
+                type="string"
+                get-set-name="ProductCode"
+                var="productCode"/>
+      <property name="WebServerType"
+                type="WebServerType"
+                get-set-name="WebServerType"
+                var="webServerType"/>
+      <property name="ApproverEmail"
+                type="string"
+                get-set-name="ApproverEmail"
+                var="approverEmail"/>
+      <property name="CSR" type="string" get-set-name="CSR" var="cSR"/>
+      <property name="Certificate"
+                type="string"
+                get-set-name="Certificate"
+                var="certificate"/>
+      <property name="Owner" type="Registrant" get-set-name="Owner" var="owner"/>
+      <property name="Admin" type="Contact" get-set-name="Admin" var="admin"/>
+      <property name="Tech" type="Contact" get-set-name="Tech" var="tech"/>
+      <property name="SanNames"
+                type="ArrayOfstring"
+                get-set-name="SanNames"
+                var="sanNames"/>
+      <property name="ObjectComment"
+                type="string"
+                get-set-name="ObjectComment"
+                var="objectComment"/>
+      <property name="ValidationType"
+                type="SslDomainValidationType"
+                get-set-name="ValidationType"
+                var="validationType"/>
+      <property name="SslProductName"
+                type="string"
+                get-set-name="SslProductName"
+                var="sslProductName"/>
+   </class>
+   <class name="GetAutoInstallSslRequest" extends="Base">
+      <property name="Handle" type="string" get-set-name="Handle" var="handle"/>
+   </class>
+   <class name="GetAutoInstallSslResponse" extends="AbstractResponse">
+      <property name="AutoInstallSslInfo"
+                type="AutoInstallSslInfo"
+                get-set-name="AutoInstallSslInfo"
+                var="autoInstallSslInfo"/>
+   </class>
+   <class name="AutoInstallSslInfo" extends="Base">
+      <property name="Handle" type="string" get-set-name="Handle" var="handle"/>
+      <property name="Status" type="string" get-set-name="Status" var="status"/>
+      <property name="Created"
+                type="dateTime"
+                get-set-name="Created"
+                var="created"/>
+      <property name="CommonName"
+                type="string"
+                get-set-name="CommonName"
+                var="commonName"/>
+      <property name="ProductCode"
+                type="string"
+                get-set-name="ProductCode"
+                var="productCode"/>
+      <property name="Email" type="string" get-set-name="Email" var="email"/>
+      <property name="SanCount"
+                type="int"
+                get-set-name="SanCount"
+                var="sanCount"/>
+      <property name="Token" type="string" get-set-name="Token" var="token"/>
+      <property name="ObjectComment"
+                type="string"
+                get-set-name="ObjectComment"
+                var="objectComment"/>
+   </class>
+   <class name="GetMessagesRequest" extends="Base">
+      <property name="OrderId"
+                type="string"
+                get-set-name="OrderId"
+                var="orderId"/>
+   </class>
+   <class name="GetMessagesResponse" extends="AbstractResponse">
+      <property name="Messages"
+                type="ArrayOfMessage"
+                get-set-name="Messages"
+                var="messages"/>
+   </class>
+   <class name="ArrayOfMessage" extends="ArrayBase">
+      <property name="Message"
+                type="Message"
+                get-set-name="Message"
+                var="message"/>
+   </class>
+   <class name="Message" extends="Base">
+      <property name="Attachments"
+                type="ArrayOfAttachment"
+                get-set-name="Attachments"
+                var="attachments"/>
+      <property name="Body" type="string" get-set-name="Body" var="body"/>
+      <property name="Created"
+                type="dateTime"
+                get-set-name="Created"
+                var="created"/>
+      <property name="FromAddress"
+                type="string"
+                get-set-name="FromAddress"
+                var="fromAddress"/>
+      <property name="Subject"
+                type="string"
+                get-set-name="Subject"
+                var="subject"/>
+      <property name="ToAddress"
+                type="string"
+                get-set-name="ToAddress"
+                var="toAddress"/>
+      <property name="Type" type="MessageType" get-set-name="Type" var="type"/>
+   </class>
+   <class name="ArrayOfAttachment" extends="ArrayBase">
+      <property name="Attachment"
+                type="Attachment"
+                get-set-name="Attachment"
+                var="attachment"/>
+   </class>
+   <class name="PollQueueRequest" extends="Base">
+      <property name="MessageType"
+                type="MessageType"
+                get-set-name="MessageType"
+                var="messageType"/>
+      <property name="ObjectType"
+                type="ObjectType"
+                get-set-name="ObjectType"
+                var="objectType"/>
+   </class>
+   <class name="PollQueueResponse" extends="AbstractResponse">
+      <property name="TotalCount"
+                type="int"
+                get-set-name="TotalCount"
+                var="totalCount"/>
+      <property name="Message"
+                type="QueueMessage"
+                get-set-name="Message"
+                var="message"/>
+   </class>
+   <class name="QueueMessage" extends="Base">
+      <property name="Attachments"
+                type="ArrayOfAttachment"
+                get-set-name="Attachments"
+                var="attachments"/>
+      <property name="ErrorCodes"
+                type="ArrayOfErrorCode"
+                get-set-name="ErrorCodes"
+                var="errorCodes"/>
+      <property name="Id" type="int" get-set-name="Id" var="id"/>
+      <property name="Message"
+                type="string"
+                get-set-name="Message"
+                var="message"/>
+      <property name="MessageType"
+                type="MessageType"
+                get-set-name="MessageType"
+                var="messageType"/>
+      <property name="ObjectHandle"
+                type="string"
+                get-set-name="ObjectHandle"
+                var="objectHandle"/>
+      <property name="ObjectName"
+                type="string"
+                get-set-name="ObjectName"
+                var="objectName"/>
+      <property name="ObjectType"
+                type="ObjectType"
+                get-set-name="ObjectType"
+                var="objectType"/>
+      <property name="OrderId"
+                type="string"
+                get-set-name="OrderId"
+                var="orderId"/>
+      <property name="OrderStatus"
+                type="OrderStatusType"
+                get-set-name="OrderStatus"
+                var="orderStatus"/>
+      <property name="OrderType"
+                type="OrderType"
+                get-set-name="OrderType"
+                var="orderType"/>
+   </class>
+   <class name="ArrayOfErrorCode" extends="ArrayBase">
+      <property name="ErrorCode"
+                type="ErrorCode"
+                get-set-name="ErrorCode"
+                var="errorCode"/>
+   </class>
+   <class name="ErrorCode" extends="Base">
+      <property name="Code" type="string" get-set-name="Code" var="code"/>
+      <property name="Message"
+                type="string"
+                get-set-name="Message"
+                var="message"/>
+   </class>
+   <class name="AckQueueMessageRequest" extends="Base">
+      <property name="MessageId"
+                type="int"
+                get-set-name="MessageId"
+                var="messageId"/>
+   </class>
+   <class name="AckQueueMessageResponse" extends="AbstractResponse"/>
+   <class name="GetQueueMessageRequest" extends="Base">
+      <property name="MessageId"
+                type="int"
+                get-set-name="MessageId"
+                var="messageId"/>
+   </class>
+   <class name="GetQueueMessageResponse" extends="AbstractResponse">
+      <property name="Message"
+                type="QueueMessage"
+                get-set-name="Message"
+                var="message"/>
+   </class>
+   <class name="UploadDocumentationRequest" extends="Base">
+      <property name="OrderId"
+                type="string"
+                get-set-name="OrderId"
+                var="orderId"/>
+      <property name="Documents"
+                type="ArrayOfAttachment"
+                get-set-name="Documents"
+                var="documents"/>
+   </class>
+   <class name="UploadDocumentationResponse" extends="AbstractResponse"/>
+   <class name="UploadMessageRequest" extends="Base">
+      <property name="OrderId"
+                type="string"
+                get-set-name="OrderId"
+                var="orderId"/>
+      <property name="Message"
+                type="Message"
+                get-set-name="Message"
+                var="message"/>
+   </class>
+   <class name="UploadMessageResponse" extends="AbstractResponse">
+      <property name="MessageId"
+                type="int"
+                get-set-name="MessageId"
+                var="messageId"/>
+   </class>
+   <class name="ArrayOfstring" extends="ArrayBase">
+      <property name="string" type="string" get-set-name="String" var="string"/>
+   </class>
+   <class name="ArrayOfint" extends="ArrayBase">
+      <property name="int" type="int" get-set-name="Int" var="int"/>
+   </class>
+   <class name="CreateOrder" extends="RequestRootElement">
+      <property name="request"
+                type="AbstractOrderRequest"
+                get-set-name="Request"
+                var="request"/>
+   </class>
+   <class name="CreateOrderResponse" extends="ResponseRootElement">
+      <property name="CreateOrderResult"
+                type="CreateOrderResponse"
+                get-set-name="CreateOrderResult"
+                var="createOrderResult"/>
+   </class>
+   <class name="ValidateOrder" extends="RequestRootElement">
+      <property name="request"
+                type="AbstractOrderRequest"
+                get-set-name="Request"
+                var="request"/>
+   </class>
+   <class name="ValidateOrderResponse" extends="ResponseRootElement">
+      <property name="ValidateOrderResult"
+                type="ValidateOrderResponse"
+                get-set-name="ValidateOrderResult"
+                var="validateOrderResult"/>
+   </class>
+   <class name="GetOrder" extends="RequestRootElement">
+      <property name="request"
+                type="GetOrderRequest"
+                get-set-name="Request"
+                var="request"/>
+   </class>
+   <class name="GetOrderResponse" extends="ResponseRootElement">
+      <property name="GetOrderResult"
+                type="GetOrderResponse"
+                get-set-name="GetOrderResult"
+                var="getOrderResult"/>
+   </class>
+   <class name="GetOrders" extends="RequestRootElement">
+      <property name="request"
+                type="GetOrdersRequest"
+                get-set-name="Request"
+                var="request"/>
+   </class>
+   <class name="GetOrdersResponse" extends="ResponseRootElement">
+      <property name="GetOrdersResult"
+                type="GetOrdersResponse"
+                get-set-name="GetOrdersResult"
+                var="getOrdersResult"/>
+   </class>
+   <class name="GetMark" extends="RequestRootElement">
+      <property name="request"
+                type="GetMarkRequest"
+                get-set-name="Request"
+                var="request"/>
+   </class>
+   <class name="GetMarkResponse" extends="ResponseRootElement">
+      <property name="GetMarkResult"
+                type="GetMarkResponse"
+                get-set-name="GetMarkResult"
+                var="getMarkResult"/>
+   </class>
+   <class name="GetDefensive" extends="RequestRootElement">
+      <property name="request"
+                type="GetDefensiveRequest"
+                get-set-name="Request"
+                var="request"/>
+   </class>
+   <class name="GetDefensiveResponse" extends="ResponseRootElement">
+      <property name="GetDefensiveResult"
+                type="GetDefensiveResponse"
+                get-set-name="GetDefensiveResult"
+                var="getDefensiveResult"/>
+   </class>
+   <class name="GetNameWatch" extends="RequestRootElement">
+      <property name="request"
+                type="GetNameWatchRequest"
+                get-set-name="Request"
+                var="request"/>
+   </class>
+   <class name="GetNameWatchResponse" extends="ResponseRootElement">
+      <property name="GetNameWatchResult"
+                type="GetNameWatchResponse"
+                get-set-name="GetNameWatchResult"
+                var="getNameWatchResult"/>
+   </class>
+   <class name="GetSslCertificate" extends="RequestRootElement">
+      <property name="request"
+                type="GetSslCertificateRequest"
+                get-set-name="Request"
+                var="request"/>
+   </class>
+   <class name="GetSslCertificateResponse" extends="ResponseRootElement">
+      <property name="GetSslCertificateResult"
+                type="GetSslCertificateResponse"
+                get-set-name="GetSslCertificateResult"
+                var="getSslCertificateResult"/>
+   </class>
+   <class name="GetAutoInstallSsl" extends="RequestRootElement">
+      <property name="request"
+                type="GetAutoInstallSslRequest"
+                get-set-name="Request"
+                var="request"/>
+   </class>
+   <class name="GetAutoInstallSslResponse" extends="ResponseRootElement">
+      <property name="GetAutoInstallSslResult"
+                type="GetAutoInstallSslResponse"
+                get-set-name="GetAutoInstallSslResult"
+                var="getAutoInstallSslResult"/>
+   </class>
+   <class name="GetMessages" extends="RequestRootElement">
+      <property name="request"
+                type="GetMessagesRequest"
+                get-set-name="Request"
+                var="request"/>
+   </class>
+   <class name="GetMessagesResponse" extends="ResponseRootElement">
+      <property name="GetMessagesResult"
+                type="GetMessagesResponse"
+                get-set-name="GetMessagesResult"
+                var="getMessagesResult"/>
+   </class>
+   <class name="PollQueue" extends="RequestRootElement">
+      <property name="request"
+                type="PollQueueRequest"
+                get-set-name="Request"
+                var="request"/>
+   </class>
+   <class name="PollQueueResponse" extends="ResponseRootElement">
+      <property name="PollQueueResult"
+                type="PollQueueResponse"
+                get-set-name="PollQueueResult"
+                var="pollQueueResult"/>
+   </class>
+   <class name="AckQueueMessage" extends="RequestRootElement">
+      <property name="request"
+                type="AckQueueMessageRequest"
+                get-set-name="Request"
+                var="request"/>
+   </class>
+   <class name="AckQueueMessageResponse" extends="ResponseRootElement">
+      <property name="AckQueueMessageResult"
+                type="AckQueueMessageResponse"
+                get-set-name="AckQueueMessageResult"
+                var="ackQueueMessageResult"/>
+   </class>
+   <class name="GetQueueMessage" extends="RequestRootElement">
+      <property name="request"
+                type="GetQueueMessageRequest"
+                get-set-name="Request"
+                var="request"/>
+   </class>
+   <class name="GetQueueMessageResponse" extends="ResponseRootElement">
+      <property name="GetQueueMessageResult"
+                type="GetQueueMessageResponse"
+                get-set-name="GetQueueMessageResult"
+                var="getQueueMessageResult"/>
+   </class>
+   <class name="UploadDocumentation" extends="RequestRootElement">
+      <property name="request"
+                type="UploadDocumentationRequest"
+                get-set-name="Request"
+                var="request"/>
+   </class>
+   <class name="UploadDocumentationResponse" extends="ResponseRootElement">
+      <property name="UploadDocumentationResult"
+                type="UploadDocumentationResponse"
+                get-set-name="UploadDocumentationResult"
+                var="uploadDocumentationResult"/>
+   </class>
+   <class name="UploadMessage" extends="RequestRootElement">
+      <property name="request"
+                type="UploadMessageRequest"
+                get-set-name="Request"
+                var="request"/>
+   </class>
+   <class name="UploadMessageResponse" extends="ResponseRootElement">
+      <property name="UploadMessageResult"
+                type="UploadMessageResponse"
+                get-set-name="UploadMessageResult"
+                var="uploadMessageResult"/>
+   </class>
+   <class name="char"/>
+   <class name="duration"/>
+   <class name="guid"/>
+   <class name="OrderType">
+      <const name="NotSet"/>
+      <const name="ContactUpdate"/>
+      <const name="ChangeLocks"/>
+      <const name="Delete"/>
+      <const name="RegistrantDetailsUpdate"/>
+      <const name="Expire"/>
+      <const name="NameserverUpdate"/>
+      <const name="OwnerChange"/>
+      <const name="Queue"/>
+      <const name="Register"/>
+      <const name="Renew"/>
+      <const name="Restore"/>
+      <const name="Transfer"/>
+      <const name="Unexpire"/>
+      <const name="TransferAway"/>
+      <const name="AutoRenew"/>
+      <const name="AutoDelete"/>
+      <const name="DetailsUpdate"/>
+      <const name="Import"/>
+      <const name="PartnerChange"/>
+      <const name="DeQueue"/>
+      <const name="UpdateAuthInfo"/>
+   </class>
+   <class name="MarkServiceType">
+      <const name="Standard"/>
+      <const name="Extended"/>
+      <const name="Off"/>
+   </class>
+   <class name="NotificationFrequencyType">
+      <const name="Daily"/>
+      <const name="Weekly"/>
+      <const name="Biweekly"/>
+      <const name="Monthly"/>
+   </class>
+   <class name="WebServerType">
+      <const name="ApacheSsl"/>
+      <const name="ApacheRaven"/>
+      <const name="ApacheSsleay"/>
+      <const name="C2net"/>
+      <const name="IbmHttp"/>
+      <const name="Iplanet"/>
+      <const name="DominoGo4625"/>
+      <const name="DominoGo4626"/>
+      <const name="Domino"/>
+      <const name="Iis4"/>
+      <const name="Iis5"/>
+      <const name="Netscape"/>
+      <const name="Zeusv3"/>
+      <const name="Other"/>
+      <const name="ApacheOpenSsl"/>
+      <const name="Apache2"/>
+      <const name="ApacheApacheSsl"/>
+      <const name="CobaltSeries"/>
+      <const name="Cpanel"/>
+      <const name="Ensim"/>
+      <const name="Hsphere"/>
+      <const name="IpSwitch"/>
+      <const name="Plesk"/>
+      <const name="Tomcat"/>
+      <const name="WebLogic"/>
+      <const name="WebSite"/>
+      <const name="WebStar"/>
+      <const name="Iis"/>
+   </class>
+   <class name="SslDomainValidationType">
+      <const name="Dns"/>
+      <const name="File"/>
+      <const name="Email"/>
+   </class>
+   <class name="MarkOrderDocType">
+      <const name="TrademarkAssigneeDeclaration"/>
+      <const name="TrademarkLicenseDeclaration"/>
+      <const name="TrademarkOther"/>
+      <const name="DeclarationOfProofOneSample"/>
+      <const name="CopyOfCourtOrder"/>
+      <const name="ProofOfUseOther"/>
+   </class>
+   <class name="OrderStatusType">
+      <const name="NotSet"/>
+      <const name="Received"/>
+      <const name="Validated"/>
+      <const name="Invalid"/>
+      <const name="PendingDocumentation"/>
+      <const name="PendingEndUserAction"/>
+      <const name="DocumentationReceived"/>
+      <const name="DocumentationApproved"/>
+      <const name="DocumentationNotApproved"/>
+      <const name="PendingNicProcessing"/>
+      <const name="PendingNicDocumentApproval"/>
+      <const name="PendingPostProcessing"/>
+      <const name="PendingInternalProcessing"/>
+      <const name="Completed"/>
+      <const name="Failed"/>
+      <const name="AuthenticationFailed"/>
+   </class>
+   <class name="ObjectType">
+      <const name="DomainType"/>
+      <const name="DefensiveType"/>
+      <const name="MarkType"/>
+      <const name="NameWatchType"/>
+      <const name="SslCertificateType"/>
+   </class>
+   <class name="SearchOrderSortType">
+      <const name="CreatedAsc"/>
+      <const name="CreatedDesc"/>
+      <const name="OrderIdAsc"/>
+      <const name="OrderIdDesc"/>
+      <const name="ObjectNameAsc"/>
+      <const name="ObjectNameDesc"/>
+   </class>
+   <class name="MessageType">
+      <const name="OrderMail"/>
+      <const name="MessageToPartner"/>
+      <const name="PartnerResponse"/>
+      <const name="Support"/>
+      <const name="Document"/>
+      <const name="DocumentationRequest"/>
+      <const name="ExpiryReminder1"/>
+      <const name="ExpiryReminder2"/>
+      <const name="ExpiryReminder3"/>
+   </class>
+</classes>

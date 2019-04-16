@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <namespace>ascio\dns\service</namespace>
+    <db>
+        <class>Db</class>
+        <namespace>ascio\dns\model</namespace>    
+    </db>
+    <lib>
+        <namespace>ascio\dns</namespace>    
+    </lib> 
+    <output-dir>../dns/service</output-dir>  
+</config>

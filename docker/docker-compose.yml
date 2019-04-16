@@ -1,0 +1,8 @@
+version: '3'
+services:
+    wsdl-generator:
+        build:
+            context: .
+        image: wsdl-generator
+        volumes:
+            - ..:/code

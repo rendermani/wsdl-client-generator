@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <namespace>ascio\v3\service</namespace>
+    <db>
+        <class>Db</class>
+        <namespace>ascio\v3\model</namespace>
+    </db>
+    <lib>
+        <namespace>ascio\v3</namespace>
+    </lib>
+    <output-dir>../v3/service</output-dir>
+    <classmap>
+        <class name="Registrant" map-to-class="ascio\lib\v3\Registrant"/>
+    </classmap>
+</config>
