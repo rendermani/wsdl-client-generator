@@ -21,7 +21,7 @@
         <xsl:param name="name"/>
         <xsl:variable name="extends">
             <xsl:variable name="namespace" select="$config//api/namespace"/>
-            <xsl:value-of select="concat(' extends ', $namespace,'\',$config//api/class, ' ')"/>           
+            <xsl:value-of select="concat($namespace,'\',$config//api/class, ' ')"/>           
             
         </xsl:variable>
         <xsl:call-template name="header"/>
