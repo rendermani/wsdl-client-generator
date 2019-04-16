@@ -6,3 +6,4 @@ output/*
 xslt/oxygen-transform.scenarios
 wsdlgenerator.xpr
 vendor/*
+composer.lock
