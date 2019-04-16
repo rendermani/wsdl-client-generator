@@ -46,10 +46,6 @@
         <xsl:text>&#10;&#10;</xsl:text>
         <xsl:text>}</xsl:text>
     </xsl:template>
-    <xsl:template match="@extends">
-        <xsl:variable name="namespace" select="$config//lib/namespace"/>
-        <xsl:value-of select="concat(' extends ', $namespace,'\',., ' ')"/>
-    </xsl:template>
     <!-- header -->
     <xsl:template name="header">
         <xsl:text>&lt;?php&#10;&#10;// XSLT-WSDL-Client. Generated DB-Model class of </xsl:text>
