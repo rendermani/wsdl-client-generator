@@ -20,7 +20,9 @@
     <xsl:template match="class">
         <xsl:param name="name"/>
         <xsl:variable name="extends">
-           <xsl:value-of select="$config//api/class"/>
+            <xsl:variable name="namespace" select="$config//api/namespace"/>
+            <xsl:value-of select="concat(' extends ', $namespace,'\',$config//api/class, ' ')"/>           
+            
         </xsl:variable>
         <xsl:call-template name="header"/>
         <xsl:value-of select="concat('&#10;namespace ', $config//api/namespace, ';&#10;')"/>
@@ -45,10 +47,6 @@
             <xsl:with-param name="function">get</xsl:with-param>
         </xsl:call-template>        
         <xsl:text>}</xsl:text>
-    </xsl:template>
-    <xsl:template match="@extends">
-        <xsl:variable name="namespace" select="$config//lib/namespace"/>
-        <xsl:value-of select="concat(' extends ', $namespace,'\',., ' ')"/>
     </xsl:template>
     <xsl:template name="id">
         <xsl:variable name="class" select="."/>
