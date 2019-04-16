@@ -1,0 +1,23 @@
+{
+    "name": "rendermani/wsdl-client-generator",
+    "description": "PHP Classes for the Ascio-API",
+    "authors": [
+        {
+            "name": "Manuel Lautenschlager",
+            "email": "manuel.lautenschlager@ascio.com"
+        }
+    ],
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.0",
+        "ext-xsl": "*",                
+        "ext-dom": "*"
+    },
+    "require-dev": {
+        "php": ">=5.3.0",
+        "phpunit/phpunit": "^8",
+        "ext-xsl": "*",                
+        "ext-dom": "*"
+    }
+}
