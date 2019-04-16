@@ -7,11 +7,11 @@
         <id>MsgId</id>
     </ids>
     <api-name>v2</api-name>
-    <namespace>ascio\v2\service</namespace>
+    <namespace>ascio\service\v2</namespace>
     <db>
         <class>DbModel</class>
         <method>db</method>
-        <namespace>ascio\v2\model</namespace>   
+        <namespace>ascio\db\v2</namespace>   
         <used-classes>
             <class>Attachment</class>
             <class>Contact</class>
@@ -32,7 +32,7 @@
     </db>
     <api>
         <class>ApiModel</class>
-        <namespace>ascio\v2\model</namespace>   
+        <namespace>ascio\api\v2</namespace>   
         <used-classes>            
             <class>Contact</class>
             <class>DnsSecKey</class>
@@ -51,7 +51,6 @@
     <lib>
         <namespace>ascio\v2</namespace>    
     </lib>    
-    <output-dir>../v2/service</output-dir>
     <classmap>
         <class name="Registrant" map-to-class="ascio\v2\Registrant"></class>
         <class name="Domain"  map-to-class="ascio\v2\Domain"></class>

@@ -140,7 +140,8 @@
         <xsl:value-of select="concat('&#9;const ', @name, ' = &#34;', @name, '&#34;;&#10;')"/>
     </xsl:template>
     <xsl:template match="@extends">
-        <xsl:value-of select="concat(' extends ', ., ' ')"/>
+        <xsl:variable name="namespace" select="$config//lib/namespace"/>
+        <xsl:value-of select="concat(' extends ', $namespace,'\',., ' ')"/>
     </xsl:template>
     <!-- soap-client-method -->
     <xsl:template match="method">
