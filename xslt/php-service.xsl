@@ -30,6 +30,9 @@
         <xsl:variable name="uri" select="concat($config//output-dir, '/', @name, '.php')"/>
         <xsl:call-template name="header"/>
         <xsl:value-of select="concat('&#10;namespace ', $config//namespace, ';&#10;')"/>
+        <xsl:if test="not(const)">
+            <xsl:value-of select="concat('use ', $config//lib/namespace,'\',@extends, ';&#10;')"/>    
+        </xsl:if>        
         <xsl:text>&#10;</xsl:text>
         <xsl:value-of select="concat('&#10;class ', @name, $extends,$implements, ' {&#10;')"/>
         <xsl:apply-templates select="classmap"/>
@@ -140,8 +143,7 @@
         <xsl:value-of select="concat('&#9;const ', @name, ' = &#34;', @name, '&#34;;&#10;')"/>
     </xsl:template>
     <xsl:template match="@extends">
-        <xsl:variable name="namespace" select="$config//lib/namespace"/>
-        <xsl:value-of select="concat(' extends ', $namespace,'\',., ' ')"/>
+        <xsl:value-of select="concat(' extends ', ., ' ')"/>
     </xsl:template>
     <!-- soap-client-method -->
     <xsl:template match="method">
