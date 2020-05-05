@@ -10,6 +10,7 @@
             <substitution>SslCertificateOrderRequest</substitution>
             <substitution>NameWatchOrderRequest</substitution>
             <substitution>DefensiveOrderRequest</substitution>
+            <substitution>DomainOrderRequest</substitution>
         </substitutions>
         <properties>
             <property name="_apiProperties">
