@@ -28,27 +28,14 @@ class Generator  {
        $structure = $this->generateStructure();
        $this->generateCode($structure,"service",true);    
        $this->generateCode($structure,"lib",false);    
-       $this->generateCode($structure,"db",false);    
-       $this->generateCode($structure,"api",false);    
+       $this->generateCode($structure,"db",false,"Db");    
+       $this->generateCode($structure,"api",false,"Api");    
 
     }
     public function setOutputPath($outputPath) {
         $this->outputPath = $outputPath; 
     }
-    private function generateStructure() {
-        $filePath = realpath(__DIR__."/../xslt/structure.xsl");
-        $xml = new  \DOMDocument("1.0","UTF-8");
-        $xml->load($this->wsdl);
-        
-        $xsl = new \DOMDocument("1.0","UTF-8");
-        $xsl->load($filePath);
-        $proc = new \XSLTProcessor;
-        $proc->importStyleSheet($xsl);
-        $this->setXsltParams($proc);
-
-       return  $proc->transformToXml($xml);
-    }
-    private function generateCode($xmlString,$dir,$replace) {
+    private function generateCode($xmlString,$dir,$replace,$fileSuffix="") {
         echo "\ngenerate $dir\n";
         if(!file_exists($this->outputPath)) {
             mkdir($this->outputPath,077,true);   
@@ -79,7 +66,7 @@ class Generator  {
                 $proc = new \XSLTProcessor;
                 $proc->importStyleSheet($xsl);
                 $this->setXsltParams($proc);     
-                $fileName = $fullPath.$child->getAttribute("name").".php";
+                $fileName = $fullPath.$child->getAttribute("name").$fileSuffix.".php";
                 if(file_exists($fileName) && $replace == false){
                     echo "Existing ".$fileName ." was not overwritten\n"; 
                     continue;
@@ -88,6 +75,19 @@ class Generator  {
             }            
         }
         return;       
+    }
+    private function generateStructure() {
+        $filePath = realpath(__DIR__."/../xslt/structure.xsl");
+        $xml = new  \DOMDocument("1.0","UTF-8");
+        $xml->load($this->wsdl);
+        
+        $xsl = new \DOMDocument("1.0","UTF-8");
+        $xsl->load($filePath);
+        $proc = new \XSLTProcessor;
+        $proc->importStyleSheet($xsl);
+        $this->setXsltParams($proc);
+
+       return  $proc->transformToXml($xml);
     }
     private function setXsltParams(\XSLTProcessor $proc) {
         $proc->setParameter('','config-file',$this->apiId);

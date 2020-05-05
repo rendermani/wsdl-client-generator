@@ -34,8 +34,9 @@
     </xsl:template>
     <xsl:template name="rest-function">
         <xsl:param name="function"></xsl:param>
-        <xsl:value-of select="concat('&#9;function ',$function,'() {&#10;')"/>
-        <xsl:text>&#9;&#9;throw new Exception("Not implemented yet.");&#10;</xsl:text>
+        <xsl:param name="arg"></xsl:param>
+        <xsl:value-of select="concat('&#9;function ',$function,'($',$arg,'=null) {&#10;')"/>
+        <xsl:text>&#9;&#9;throw new \ascio\lib\AscioException("Not implemented yet.");&#10;</xsl:text>
         <xsl:text>&#9;}&#10;</xsl:text>
     </xsl:template>
 </xsl:stylesheet>

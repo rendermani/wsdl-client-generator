@@ -26,10 +26,7 @@
         <xsl:value-of select="concat('&#10;namespace ', $config//lib/namespace, ';&#10;')"/>
         <xsl:apply-templates select="@has-db" mode="use-ns"/>
         <xsl:apply-templates select="@has-api" mode="use-ns"/>
-        <xsl:value-of select="concat('&#10;class ', @name,' extends ', $extends, ' {&#10;')"/>
-        <xsl:text>&#10;</xsl:text>
-        <xsl:call-template name="constructor"></xsl:call-template>
-        <xsl:text>&#10;</xsl:text>
+        <xsl:value-of select="concat('&#10;class ', @name,' extends ', $extends, ' {&#10;')"/>               
         <xsl:text>}</xsl:text>
     </xsl:template>
     <xsl:template match="@extends">
@@ -37,7 +34,7 @@
     </xsl:template>
     <!-- db -->
     <xsl:template match="@has-db" mode="def">
-        <xsl:text>&#9;private $_db;&#10;</xsl:text>
+        <xsl:text>&#9;protected $_db;&#10;</xsl:text>
     </xsl:template>
     <xsl:template match="@has-db">
         <xsl:value-of select="concat('&#9;&#9;$this->_db = new ',../@name,'Db($this);&#10;')"/>
@@ -47,7 +44,7 @@
     </xsl:template>
     <!-- api -->
     <xsl:template match="@has-api" mode="def">
-        <xsl:text>&#9;private $_api;&#10;</xsl:text>
+        <xsl:text>&#9;protected $_api;&#10;</xsl:text>
     </xsl:template>
     <xsl:template match="@has-api">
         <xsl:value-of select="concat('&#9;&#9;$this->_api = new ',../@name,'Api($this);&#10;')"/>
