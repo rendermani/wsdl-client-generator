@@ -132,6 +132,9 @@
                 <xsl:when test="@const=true()">string</xsl:when>
                 <xsl:when test="@type='string'">string</xsl:when>
                 <xsl:when test="@type='short'">int</xsl:when>
+                <xsl:when test="@type='long'">int</xsl:when>
+                <xsl:when test="@type='double'">float</xsl:when>
+                <xsl:when test="@type='float'">float</xsl:when>
                 <xsl:when test="@type='int'">int</xsl:when>
                 <xsl:when test="@type='integer'">int</xsl:when>
                 <xsl:when test="@type='boolean'">bool</xsl:when>
@@ -190,7 +193,7 @@
         <xsl:variable name="add"
             select="concat('&#9;public function add', @get-set-name, ' (',$add-arguments,') : ', $type, ' {&#10;')"/>        
         <xsl:variable name="addContent"
-            select="concat('&#9;&#9;return $this->add(&quot;',@name, '&quot;,&quot;',$escaped-type, '&quot;,func_get_args());&#10;')"/>
+            select="concat('&#9;&#9;return $this->addProperty(&quot;',@name, '&quot;,&quot;',$escaped-type, '&quot;,func_get_args());&#10;')"/>
         <xsl:value-of select="concat($set, $setContent, '&#9;}&#10;')"/>
         <xsl:value-of select="concat($get, $getContent, '&#9;}&#10;')"/>
         <xsl:if test="@native-type=false()">
@@ -278,7 +281,7 @@
             <text>&#9;* @param @name|null $api&#10;</text>
             <xsl:value-of select="concat('&#9;* @return ',@name,'Api&#10;')"/>
             <text>&#9;*/&#10;</text>
-            <xsl:text>&#9;public function api($api = null) {&#10;</xsl:text>            
+            <xsl:text>&#9;public function api($api = null) : ?\ascio\base\ApiModelBase {&#10;</xsl:text>            
             <xsl:text>&#9;&#9;if(!$api) {&#10;</xsl:text>
             <xsl:text>&#9;&#9;&#9;return $this->_api;&#10;</xsl:text>
             <xsl:text>&#9;&#9;}&#10;</xsl:text>
