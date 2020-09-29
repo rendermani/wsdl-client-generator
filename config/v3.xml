@@ -16,8 +16,13 @@
         <used-classes>
             <class>AbstractOrderRequest</class>
             <class>AbstractMark</class>
+            <class>Domain</class>
+            <class>DomainInfo</class>
+            <class>DomainTradeMark</class>
             <class>Registrant</class>
             <class>Contact</class>
+            <class>NameServers</class>
+            <class>NameServer</class>
             <class>Extensions</class>
             <class>KeyValue</class>
             <class>AutoInstallSslOrderRequest</class>
@@ -29,6 +34,7 @@
             <class>SecurityHeaderDetails</class>
             <class>ArrayOfMarkOrderDocument</class>
             <class>MarkOrderRequest</class>
+            <class>DomainOrderRequest</class>
             <class>SslCertificateOrderRequest</class>
             <class>MarkOrderDocument</class>            
             <class>Attachment</class>
@@ -95,7 +101,17 @@
             <class>AckQueueMessage</class>
             <class>GetQueueMessage</class>
             <class>UploadDocumentation</class>
-            <class>UploadMessage</class>     
+            <class>UploadMessage</class>    
+            <class>GetAccountBalanceResponse</class> 
+            <class>GetAccountTransactionsResponse</class> 
+            <class>AccountTransaction</class> 
+            <class>GetSalesLinesResponse</class> 
+            <class>GetInvoiceResponse</class> 
+            <class>SalesLineGroup</class> 
+            <class>GetCreditNoteResponse</class> 
+            <class>User</class> 
+            <class>DnsSecKeys</class>
+            <class>DnsSecKey</class>   
         </used-classes>
     </db>
     <api>
@@ -105,7 +121,10 @@
         <used-classes>   
             <class>Registrant</class>
             <class>Contact</class>
+            <class>NameServers</class>
+            <class>NameServer</class>
             <class>Extensions</class>
+            <class>Domain</class>
             <class>AutoInstallSsl</class>    
             <class>NameWatch</class>        
             <class>SslCertificate</class>
@@ -116,7 +135,13 @@
             <class>DefensiveInfo</class>    
             <class>MarkInfo</class>    
             <class>OrderInfo</class>
-            <class>AbstractOrderRequest</class>                 
+            <class>DomainInfo</class>
+            <class>AbstractOrderRequest</class>  
+            <class>GetAccountBalance</class> 
+            <class>AccountTransaction</class> 
+            <class>SalesLineGroup</class>  
+            <class>DnsSecKeys</class>
+            <class>DnsSecKey</class>           
         </used-classes>   
     </api>
     <lib>
