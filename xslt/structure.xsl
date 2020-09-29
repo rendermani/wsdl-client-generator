@@ -157,6 +157,7 @@
             <xsl:if test="
                 contains(@type, ':string') or
                 contains(@type, ':decimal') or
+                contains(@type, ':double') or
                 contains(@type, ':int') or
                 contains(@type, ':integer') or
                 contains(@type, ':boolean') or
