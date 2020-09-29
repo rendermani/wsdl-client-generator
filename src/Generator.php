@@ -9,6 +9,7 @@ class Generator  {
     private $apiId;
     private $apiName;
     private $outputPath;
+    private $configPath;
     public function __construct($apiName,$apiId,$wsdl)
     {
         $this->apiName = $apiName;
@@ -31,6 +32,9 @@ class Generator  {
        $this->generateCode($structure,"db",false,"Db");    
        $this->generateCode($structure,"api",false,"Api");    
 
+    }
+    public function setConfigPath($configPath) {
+        $this->configPath = $configPath; 
     }
     public function setOutputPath($outputPath) {
         $this->outputPath = $outputPath; 
@@ -70,6 +74,8 @@ class Generator  {
                 if(file_exists($fileName) && $replace == false){
                     echo "Existing ".$fileName ." was not overwritten\n"; 
                     continue;
+                } else {
+                    echo "Write ". $fileName."\n";
                 }
                 $proc->transformToUri($childDoc,$fileName);
             }            
@@ -90,8 +96,9 @@ class Generator  {
        return  $proc->transformToXml($xml);
     }
     private function setXsltParams(\XSLTProcessor $proc) {
-        $proc->setParameter('','config-file',$this->apiId);
-        $proc->setParameter('','api-name',$this->apiName);
-        
+        $config = $this->configPath ? $this->configPath. "/" : "";
+        //dd($config.$this->apiId);
+        $proc->setParameter('','config-file',$config.$this->apiId);
+        $proc->setParameter('','api-name',$this->apiName);        
     }
 }
