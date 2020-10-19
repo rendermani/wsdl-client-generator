@@ -5,10 +5,10 @@
     <xsl:import href="lib.xsl"/>
     <xsl:param name="config-file"/>
     <xsl:output method="text"/>
-    <xsl:variable name="config" select="document(concat('../config/', $config-file, '.xml'))"/>
+    <xsl:variable name="config" select="document(concat($config-file, '.xml'))"/>
     <xsl:variable name="escaped-ns">
         <xsl:call-template name="replace-string">
-            <xsl:with-param name="text" select="$config/config/namespace"/>
+            <xsl:with-param name="text" select="$config/config/lib/namespace"/>
             <xsl:with-param name="replace" select="'\'"/>
             <xsl:with-param name="with" select="'\\'"/>
         </xsl:call-template>
@@ -24,27 +24,56 @@
         </xsl:variable>
         <xsl:variable name="implements">
             <xsl:if test="@extends='ArrayBase'">
-                <xsl:text>implements Iterator </xsl:text>
+                <xsl:text>implements \Iterator </xsl:text>
             </xsl:if>
         </xsl:variable>
+        
         <xsl:variable name="uri" select="concat($config//output-dir, '/', @name, '.php')"/>
         <xsl:call-template name="header"/>
         <xsl:value-of select="concat('&#10;namespace ', $config//namespace, ';&#10;')"/>
-        <xsl:if test="not(const)">
-            <xsl:value-of select="concat('use ', $config//lib/namespace,'\',@extends, ';&#10;')"/>    
-        </xsl:if>        
+        <xsl:call-template name="use"></xsl:call-template>   
         <xsl:text>&#10;</xsl:text>
         <xsl:value-of select="concat('&#10;class ', @name, $extends,$implements, ' {&#10;')"/>
         <xsl:apply-templates select="classmap"/>
         <xsl:apply-templates select="properties" mode="list"></xsl:apply-templates>
-        <xsl:apply-templates select="properties/property" mode="def"/>
+        <xsl:apply-templates select="substitutions"></xsl:apply-templates>
+        <xsl:apply-templates select="@substituted"></xsl:apply-templates>
+        <xsl:apply-templates select="properties/property" mode="def"/>        
         <xsl:text>&#10;&#10;</xsl:text>
+        <xsl:call-template name="constructor"></xsl:call-template>
+        <xsl:call-template name="api"/>
+        <xsl:call-template name="db"/>        
         <xsl:apply-templates select="const | properties/property | method"/>
         <xsl:text>}</xsl:text>
     </xsl:template>
+    <xsl:template match="@substituted">
+        <xsl:text>&#10;&#9;protected $_substituted = true;</xsl:text>
+    </xsl:template>
+    <xsl:template name = "use">
+        <xsl:variable name="ns">
+            <xsl:choose>
+                <xsl:when test="@lib-extend">
+                    <xsl:value-of select="$config//lib/namespace"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$config//base/namespace"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:if test="not(const)">
+            <xsl:value-of select="concat('use ', $config//db/namespace,'\',@name, 'Db;&#10;')"/>
+            <xsl:value-of select="concat('use ', $config//api/namespace,'\',@name, 'Api;&#10;')"/>
+        </xsl:if>  
+         <xsl:if test="@extends">
+            <xsl:value-of select="concat('use ',$ns,'\',@extends, ';&#10;')"/>
+        </xsl:if>       
+        <xsl:if test="@inherited='true'">
+            <xsl:value-of select="concat('use ', $config//api/namespace,'\',@extends, 'Api;&#10;')"/>
+        </xsl:if>
+    </xsl:template>
     <!-- classmap -->
     <xsl:template match="classmap">
-        <xsl:text>&#9;private static $classmap = [&#10;</xsl:text>
+        <xsl:text>&#9;protected $classmap = [&#10;</xsl:text>
         <xsl:apply-templates select="map"/>
         <xsl:text>&#9;];&#10;</xsl:text>
     </xsl:template>
@@ -67,7 +96,7 @@
 
             </xsl:choose>
         </xsl:variable>
-        <xsl:value-of select="concat('&#9;&#9;&#34;', ., '&#34; => &#34;', $class, '&#34;,&#10;')"/>
+        <xsl:value-of select="concat('&#9;&#9;&quot;', ., '&quot; => &quot;', $class, '&quot;,&#10;')"/>
     </xsl:template>
     <!-- property list -->
     <xsl:template match="properties" mode="list">
@@ -79,7 +108,7 @@
         <xsl:text>];</xsl:text>
     </xsl:template>
     <xsl:template match="property" mode="list">        
-        <xsl:value-of select="concat('&#34;', @name, '&#34;')"/>
+        <xsl:value-of select="concat('&quot;', @name, '&quot;')"/>
         <xsl:if test="not(position()=last())">, </xsl:if>        
     </xsl:template>
     <!-- property def -->
@@ -87,8 +116,8 @@
         <xsl:text>&#10;</xsl:text>
         <xsl:value-of select="concat('&#9;protected $', @name, ';')"/>
     </xsl:template>
-    <!-- property setter and getter -->
-    <xsl:template match="property">
+    <!-- property setter and getter -->    
+    <xsl:template match="property[not(@inherited)]">
         <xsl:variable name="class" select="../../@name"/>
         <xsl:variable name="t" select="@type"/>
         <xsl:variable name="custom-class" select="$config//class[@name = ($t)]/@map-to-class"/>
@@ -101,9 +130,18 @@
             <xsl:choose>
                 <xsl:when test="$custom-class">
                     <xsl:value-of select="concat('\',$custom-class)"/>
-                </xsl:when>   
+                </xsl:when>
+                <xsl:when test="@const=true()">string</xsl:when>
+                <xsl:when test="@type='string'">string</xsl:when>
+                <xsl:when test="@type='short'">int</xsl:when>
+                <xsl:when test="@type='long'">int</xsl:when>
+                <xsl:when test="@type='double'">float</xsl:when>
+                <xsl:when test="@type='float'">float</xsl:when>
+                <xsl:when test="@type='int'">int</xsl:when>
+                <xsl:when test="@type='integer'">int</xsl:when>
+                <xsl:when test="@type='boolean'">bool</xsl:when>
                 <xsl:when test="@native-type=true()">
-                    <xsl:value-of select="@type"/>
+                    <xsl:value-of select="concat('\',@type)"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="concat('\',$config//lib/namespace,'\',@type)"/>
@@ -119,28 +157,58 @@
         </xsl:variable>
         <xsl:variable name="return-type">
             <xsl:choose>
-                <xsl:when test="$array">Iterator</xsl:when>
+                <xsl:when test="@array-item=true()">Iterator</xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$escaped-type"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-
-        <xsl:variable name="type-string" select="concat(' &#34;', $escaped-type, '&#34;')"/>
+        <xsl:variable name="signature-type">
+            <xsl:choose>
+                <xsl:when test="@array-item=true()">Iterable</xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$type"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="type-string" select="concat(' &quot;', $escaped-type, '&quot;')"/>
         <xsl:variable name="set"
-            select="concat('&#9;public function set', @get-set-name, ' (', $type, ' $', @var, ') : ', $class, ' {&#10;')"/>
-        <xsl:variable name="get"
-            select="concat('&#9;public function get', @get-set-name, ' () : ', $type, ' {&#10;')"/>
+            select="concat('&#9;public function set', @get-set-name, ' (?', $signature-type, ' $', @var, ' = null) : self {&#10;')"/>
         <xsl:variable name="setContent"
-            select="concat('&#9;&#9;$this->setProperty(&#34;', @name, '&#34;, $', @var, ',', $type-string, ');&#10;&#9;&#9;return $this;&#10;')"/>
+            select="concat('&#9;&#9;$this->set(&quot;', @name, '&quot;, $', @var, ');&#10;&#9;&#9;return $this;&#10;')"/>
+              <xsl:variable name="create"
+                  select="concat('&#9;public function create', @get-set-name, ' () : ', $type, ' {&#10;')"/>
+        <xsl:variable name="createContent"
+            select="concat('&#9;&#9;return $this->create (&quot;', @name, '&quot;,', $type-string, ');&#10;')"/>
+        <xsl:variable name="get"
+            select="concat('&#9;public function get', @get-set-name, ' () : ?', $signature-type, ' {&#10;')"/>        
         <xsl:variable name="getContent"
-            select="concat('&#9;&#9;return $this->get',$array,'Property(&#34;', @name, '&#34;,', $type-string, ');&#10;')"/>
+            select="concat('&#9;&#9;return $this->get(&quot;', @name, '&quot;,',$type-string,');&#10;')"/>
+        <xsl:variable name="add-arguments">
+            <xsl:for-each select="property">
+                <xsl:if test="not(position()=1)">
+                    <xsl:text>, </xsl:text>
+                </xsl:if>     
+                <xsl:value-of select="concat(@type,' $',@var)"/>    
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:variable name="add"
+            select="concat('&#9;public function add', @get-set-name, ' ($item = null) : ', $type, ' {&#10;')"/>        
+        <xsl:variable name="addContent"
+            select="concat('&#9;&#9;return $this->addItem(&quot;',@name, '&quot;,&quot;',$escaped-type, '&quot;,func_get_args());&#10;')"/>
         <xsl:value-of select="concat($set, $setContent, '&#9;}&#10;')"/>
         <xsl:value-of select="concat($get, $getContent, '&#9;}&#10;')"/>
+        <xsl:if test="@native-type=false()">
+            <xsl:value-of select="concat($create, $createContent, '&#9;}&#10;')"/>    
+        </xsl:if>
+        <xsl:if test="@array-item=true()">
+            <xsl:value-of select="concat($add, $addContent, '&#9;}&#10;')"/>    
+        </xsl:if>
+        
     </xsl:template>
     <!-- const -->
     <xsl:template match="const">
-        <xsl:value-of select="concat('&#9;const ', @name, ' = &#34;', @name, '&#34;;&#10;')"/>
+        <xsl:value-of select="concat('&#9;const ', @name, ' = &quot;', @name, '&quot;;&#10;')"/>
     </xsl:template>
     <xsl:template match="@extends">
         <xsl:value-of select="concat(' extends ', ., ' ')"/>
@@ -149,28 +217,37 @@
     <xsl:template match="method">
         <xsl:variable name="arguments">
             <xsl:for-each select="argument[not(@name = 'sessionId')]">
+                <xsl:variable name="type">
+                    <xsl:choose>
+                        <xsl:when test="@const=true()">string</xsl:when>
+                        <xsl:otherwise><xsl:value-of select="@type"/></xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+
                 <xsl:if test="not(position() = 1)">, </xsl:if>
-                <xsl:value-of select="concat(@type, ' $', @name)"/>
+                <xsl:value-of select="concat($type, ' $', @name)"/>
             </xsl:for-each>
         </xsl:variable>
         <xsl:variable name="call-arguments">
+            <xsl:text>[</xsl:text>
             <xsl:for-each select="argument[not(@name = 'sessionId')]">
                 <xsl:if test="not(position() = 1)">, </xsl:if>
-                <xsl:value-of select="concat('[&quot;',@name,'&quot; => $',@name,']')"/>
+                <xsl:value-of select="concat('&quot;',@name,'&quot; => $',@name)"/>                
             </xsl:for-each>
+            <xsl:text>]</xsl:text>
         </xsl:variable>
         <xsl:variable name="spacer">
             <xsl:if test="not($arguments = '')">
                 <xsl:text>, </xsl:text>
             </xsl:if>
         </xsl:variable>
-        <xsl:value-of select="concat('&#9;public function ', @name, '(')"/>
+        <xsl:value-of select="concat('&#9;public function ', @method-name, '(')"/>
         <xsl:value-of select="$arguments"/>
         <xsl:text>) </xsl:text>
         <xsl:value-of select="concat(': ', ./return)"/>
         <xsl:text> {&#10;</xsl:text>
         <xsl:value-of
-            select="concat('&#9;&#9;return $this->call(&#34;', @name, '&#34;', $spacer, $call-arguments, ');&#10;')"/>
+            select="concat('&#9;&#9;return $this->call(&quot;', @name, '&quot;', $spacer, $call-arguments, ');&#10;')"/>
         <xsl:text>&#9;}&#10;</xsl:text>
     </xsl:template>
     <!-- header -->
@@ -179,4 +256,77 @@
         <xsl:value-of select="@name"/>
         <xsl:text>&#10;</xsl:text>
     </xsl:template>
+    <xsl:template name="constructor">
+        <xsl:if test="@extends='DbBase' or @extends='DbArrayBase' or @has-db=true()">     
+            <xsl:text>&#9;public function __construct($parent = null) {&#10;</xsl:text>     
+            <xsl:text>&#9;&#9;parent::__construct($parent);&#10;</xsl:text>
+            <xsl:text>&#10;&#9;&#9;//set the database model&#10;</xsl:text>        
+            <xsl:value-of select="concat('&#9;&#9;$db = new ',@name,'Db();&#10;')"/>        
+            <xsl:text>&#9;&#9;$db->parent($this);&#10;</xsl:text>
+            <xsl:text>&#9;&#9;$this->db($db);&#10;</xsl:text>
+            <xsl:if test="@name = $config//api/used-classes/class">                     
+                <xsl:text>&#10;&#9;&#9;//set the api model&#10;</xsl:text>
+                <xsl:value-of select="concat('&#9;&#9;$api = new ',@name,'Api($this);&#10;')"/>
+                <xsl:text>&#9;&#9;$api->parent($this);&#10;</xsl:text>
+                <xsl:value-of select="concat('&#9;&#9;$api->config($this->config()->',$config//api-name,');&#10;')"></xsl:value-of>
+                <xsl:text>&#9;&#9;$this->api($api);&#10;</xsl:text>       
+                
+            </xsl:if>              
+            <xsl:text>&#9;}&#10;</xsl:text>
+        </xsl:if>
+        
+    </xsl:template>
+    <xsl:template name="api">
+        <xsl:if test="@name = $config//api/used-classes/class">                       
+            <text>&#9;/**&#10;</text>
+            <text>&#9;* Provides API-Specific methods like update,create,delete.&#10;</text>
+            <text>&#9;* @param @name|null $api&#10;</text>
+            <xsl:value-of select="concat('&#9;* @return ',@name,'Api&#10;')"/>
+            <text>&#9;*/&#10;</text>
+            <xsl:text>&#9;public function api($api = null) : ?\ascio\base\ApiModelBase {&#10;</xsl:text>            
+            <xsl:text>&#9;&#9;if(!$api) {&#10;</xsl:text>
+            <xsl:text>&#9;&#9;&#9;return $this->_api;&#10;</xsl:text>
+            <xsl:text>&#9;&#9;}&#10;</xsl:text>
+            <xsl:text>&#9;&#9;$this->_api = $api;&#10;</xsl:text>
+            <xsl:text>&#9;&#9;return $api;&#10;</xsl:text>
+            <xsl:text>&#9;}&#10;</xsl:text>            
+        </xsl:if>
+    </xsl:template>
+    <xsl:template name="db">
+        <xsl:if test="@has-db=true()">            
+            <text>&#9;/**&#10;</text>
+            <text>&#9;* Provides DB-Specific methods like update,create,delete.&#10;</text>
+            <xsl:value-of select="concat('&#9;* @param ',@name,'Db|null $db&#10;')"/>
+            <xsl:value-of select="concat('&#9;* @return ',@name,'Db&#10;')"/>
+            <text>&#9;*/&#10;</text>
+            <xsl:text>&#9;public function db($db = null) {&#10;</xsl:text>          
+            <xsl:text>&#9;&#9;if(!$db) {&#10;</xsl:text>
+            <xsl:text>&#9;&#9;&#9;return $this->_db;&#10;</xsl:text>
+            <xsl:text>&#9;&#9;}&#10;</xsl:text>
+            <xsl:text>&#9;&#9;$this->_db = $db;&#10;</xsl:text>
+            <xsl:text>&#9;&#9;$this->_db->parent($this);&#10;</xsl:text>
+            <xsl:text>&#9;&#9;return $db;&#10;</xsl:text>
+            <xsl:text>&#9;}&#10;</xsl:text>            
+        </xsl:if>       
+    </xsl:template>
+    <xsl:template match="substitutions">
+        <xsl:text>&#10;&#9;protected $_substitutions = [&#10;</xsl:text>
+        <xsl:apply-templates select="substitution"></xsl:apply-templates>
+        <xsl:text>&#9;];&#10;</xsl:text>
+    </xsl:template>
+    <xsl:template match="substitution">
+        <xsl:variable name="type">
+            <xsl:call-template name="replace-string">
+                <xsl:with-param name="text" select="concat('\',$config//lib/namespace,'\',.)"/>
+                <xsl:with-param name="replace" select="'\'"/>
+                <xsl:with-param name="with" select="'\\'"/>                
+            </xsl:call-template>    
+        </xsl:variable>
+        <xsl:text>&#9;&#9;</xsl:text>
+        
+        <xsl:value-of select="concat('[&quot;name&quot; => &quot;',.,'&quot;,&quot;type&quot; => &quot;',$type,'&quot;]')"/>
+        <xsl:if test="not(position()=last())"><xsl:text>,</xsl:text></xsl:if>
+        <xsl:text> &#10;</xsl:text>
+    </xsl:template>
+    <xsl:template match="*"></xsl:template>
 </xsl:stylesheet>

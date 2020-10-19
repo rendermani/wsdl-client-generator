@@ -5,7 +5,7 @@
     <xsl:import href="lib.xsl"/>
     <xsl:param name="config-file"/>
     <xsl:output method="text"/>
-    <xsl:variable name="config" select="document(concat('../config/', $config-file, '.xml'))"/>
+    <xsl:variable name="config" select="document(concat($config-file, '.xml'))"/>
     <xsl:variable name="escaped-ns">
         <xsl:call-template name="replace-string">
             <xsl:with-param name="text" select="$config/config/namespace"/>
@@ -24,25 +24,29 @@
         </xsl:variable>
         <xsl:call-template name="header"/>
         <xsl:value-of select="concat('&#10;namespace ', $config//api/namespace, ';&#10;')"/>
+        <xsl:value-of select="concat('use ', $config//base/namespace,'\',$extends, ';&#10;')"/> 
         <xsl:text>&#10;</xsl:text>
         <xsl:value-of select="concat('&#10;class ', @name,'Api extends ', $extends, ' {&#10;')"/>
         <xsl:text>&#10;</xsl:text>
         <xsl:call-template name="id"></xsl:call-template>
-        <xsl:text>&#9;public $parent;&#10;</xsl:text>
-        <xsl:text>&#9;public $client;</xsl:text>
+        <xsl:text>&#9;public $parent;</xsl:text>
         <xsl:apply-templates select="properties" mode="list"></xsl:apply-templates>        
         <xsl:text>&#10;&#10;</xsl:text>        
-        <xsl:call-template name="rest-function">
+        <xsl:call-template name="rest-function">        
             <xsl:with-param name="function">create</xsl:with-param>
+            <xsl:with-param name="arg">data</xsl:with-param>
         </xsl:call-template>
         <xsl:call-template name="rest-function">
             <xsl:with-param name="function">update</xsl:with-param>
+            <xsl:with-param name="arg">data</xsl:with-param>
         </xsl:call-template>
         <xsl:call-template name="rest-function">
             <xsl:with-param name="function">delete</xsl:with-param>
+            <xsl:with-param name="arg">id</xsl:with-param>
         </xsl:call-template>
         <xsl:call-template name="rest-function">
             <xsl:with-param name="function">get</xsl:with-param>
+            <xsl:with-param name="arg">id</xsl:with-param>
         </xsl:call-template>        
         <xsl:text>}</xsl:text>
     </xsl:template>
@@ -50,7 +54,7 @@
         <xsl:variable name="class" select="."/>
         <xsl:variable name="id" select="$config//ids/id[.=$class//property/@name]"/>
         <xsl:if test="$id">
-            <xsl:value-of select="concat('&#9;public const IdProperty=&quot;',$id,'&quot;;&#10;')"/>
+            <xsl:value-of select="concat('&#9;public $idProperty=&quot;',$id,'&quot;;&#10;')"/>
         </xsl:if>
     </xsl:template>
     <!-- property list -->
