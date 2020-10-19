@@ -67,4 +67,7 @@
         <class name="Registrant" map-to-class="ascio\v2\Registrant"></class>
         <class name="Domain"  map-to-class="ascio\v2\Domain"></class>
     </classmap>    
+    <base>
+        <namespace>ascio\base\v2</namespace>    
+    </base>
 </config>
