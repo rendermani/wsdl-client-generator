@@ -5,7 +5,7 @@
     <xsl:import href="lib.xsl"/>
     <xsl:param name="config-file"/>
     <xsl:output method="text"/>
-    <xsl:variable name="config" select="document(concat('../config/', $config-file, '.xml'))"/>
+    <xsl:variable name="config" select="document($config-file)"/>
     <xsl:variable name="escaped-ns">
         <xsl:call-template name="replace-string">
             <xsl:with-param name="text" select="$config/config/lib/namespace"/>
@@ -60,10 +60,10 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:if test="not(const)">
-            <xsl:value-of select="concat('use ',$ns,'\',@extends, ';&#10;')"/>
+        <xsl:if test="not(const)">            
             <xsl:value-of select="concat('use ', $config//db/namespace,'\',@name, 'Db;&#10;')"/>
             <xsl:value-of select="concat('use ', $config//api/namespace,'\',@name, 'Api;&#10;')"/>
+            <xsl:value-of select="concat('use ',$ns,'\',@extends, ';&#10;')"/>
         </xsl:if>     
         <xsl:if test="@inherited='true'">
             <xsl:value-of select="concat('use ', $config//api/namespace,'\',@extends, 'Api;&#10;')"/>
@@ -191,9 +191,9 @@
             </xsl:for-each>
         </xsl:variable>
         <xsl:variable name="add"
-            select="concat('&#9;public function add', @get-set-name, ' (',$add-arguments,') : ', $type, ' {&#10;')"/>        
+            select="concat('&#9;public function add', @get-set-name, ' ($item = null) : ', $type, ' {&#10;')"/>        
         <xsl:variable name="addContent"
-            select="concat('&#9;&#9;return $this->addProperty(&quot;',@name, '&quot;,&quot;',$escaped-type, '&quot;,func_get_args());&#10;')"/>
+            select="concat('&#9;&#9;return $this->addItem(&quot;',@name, '&quot;,&quot;',$escaped-type, '&quot;,func_get_args());&#10;')"/>
         <xsl:value-of select="concat($set, $setContent, '&#9;}&#10;')"/>
         <xsl:value-of select="concat($get, $getContent, '&#9;}&#10;')"/>
         <xsl:if test="@native-type=false()">

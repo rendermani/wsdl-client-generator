@@ -96,9 +96,7 @@ class Generator  {
        return  $proc->transformToXml($xml);
     }
     private function setXsltParams(\XSLTProcessor $proc) {
-        $config = $this->configPath ? $this->configPath. "/" : "";
-        //dd($config.$this->apiId);
-        $proc->setParameter('','config-file',$config.$this->apiId);
+        $proc->setParameter('','config-file',$this->configPath."/".$this->apiId.".xml");
         $proc->setParameter('','api-name',$this->apiName);        
     }
 }

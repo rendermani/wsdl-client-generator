@@ -14,7 +14,7 @@
     <xsl:key name="types" match="//xsd:schema/xsd:complexType | //xsd:schema/xsd:simpleType"
         use="@name"/>
     <xsl:param name="config-file"/>
-    <xsl:variable name="config" select="document(concat('../config/', $config-file, '.xml'))"/>
+    <xsl:variable name="config" select="document($config-file)"/>
     <xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'"/>
     <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
     <xsl:param name="api-name" select="'Ascio V2'"/>

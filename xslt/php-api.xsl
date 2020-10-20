@@ -5,7 +5,7 @@
     <xsl:import href="lib.xsl"/>
     <xsl:param name="config-file"/>
     <xsl:output method="text"/>
-    <xsl:variable name="config" select="document(concat('../config/', $config-file, '.xml'))"/>
+    <xsl:variable name="config" select="document($config-file)"/>
     <xsl:variable name="escaped-ns">
         <xsl:call-template name="replace-string">
             <xsl:with-param name="text" select="$config/config/namespace"/>

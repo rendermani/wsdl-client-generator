@@ -4,7 +4,7 @@
     exclude-result-prefixes="xs"
     version="1.0">
     <xsl:param name="config-file"/>
-    <xsl:variable name="config" select="document(concat('../config/', $config-file, '.xml'))"/>
+    <xsl:variable name="config" select="document($config-file)"/>
     <xsl:template name="replace-string">
         <xsl:param name="text"/>
         <xsl:param name="replace"/>
