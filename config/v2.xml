@@ -59,7 +59,10 @@
     <lib>
         <namespace>ascio\v2</namespace> 
         <class>ascio\lib\Ascio</class>   
-    </lib>    
+    </lib>
+    <base>
+         <namespace>ascio\base\v2</namespace> 
+    </base>    
     <classmap>
         <class name="Registrant" map-to-class="ascio\v2\Registrant"></class>
         <class name="Domain"  map-to-class="ascio\v2\Domain"></class>

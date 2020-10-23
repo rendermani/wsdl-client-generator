@@ -111,7 +111,8 @@
             <class>GetCreditNoteResponse</class> 
             <class>User</class> 
             <class>DnsSecKeys</class>
-            <class>DnsSecKey</class>   
+            <class>DnsSecKey</class> 
+            <class>PrivacyProxy</class>  
         </used-classes>
     </db>
     <api>
