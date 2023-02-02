@@ -48,9 +48,9 @@ class Generator  {
         if(!file_exists($fullPath)) {
             mkdir($fullPath,077,true);   
         }
-        $filePath = realpath(__DIR__."/../xslt/".$this->lang."/".$dir.".xsl");
+        $filePath = realpath(__DIR__."/../xslt/".$this->lang."/".$this->lang."-".$dir.".xsl");
         if(!file_exists($filePath)) {
-            throw new \Exception("Could not load XSLT: ". $filePath."\n");
+            throw new \Exception("Could not load XSLT: ".__DIR__."/../xslt/".$this->lang."/".$this->lang."-". $dir.".xsl"."\n");
         }
         $xsl = new \DOMDocument("1.0","UTF-8");
         $xsl->load($filePath);

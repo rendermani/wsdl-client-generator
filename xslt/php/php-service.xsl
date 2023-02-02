@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     exclude-result-prefixes="xs" version="1.0">
-    <xsl:import href="lib.xsl"/>
+    <xsl:import href="../lib.xsl"/>
     <xsl:param name="config-file"/>
     <xsl:output method="text"/>
     <xsl:variable name="config" select="document($config-file)"/>
